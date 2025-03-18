@@ -1,0 +1,16 @@
+name: sleep_env  # Change this if needed
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10  # Match the Python version you're using
+  - numpy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - jupyter
+  - ipykernel
+  - pip
+  - pip:
+      - mlflow  # Installed via pip since it's not always available via Conda
