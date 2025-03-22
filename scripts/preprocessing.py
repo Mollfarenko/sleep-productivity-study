@@ -3,15 +3,15 @@ from sklearn.preprocessing import OneHotEncoder
 import os
 
 # Define file paths
-RAW_DATA_PATH = "../data/raw/sleep_cycle_productivity.csv"
-PROCESSED_DATA_PATH = "../data/processed/sleep_productivity_clean.csv"
+RAW_DATA_PATH = "data/raw/sleep_cycle_productivity.csv"
+PROCESSED_DATA_PATH = "data/processed/sleep_productivity_clean.csv"
 
 def load_data(filepath):
     """Load raw dataset from CSV file."""
     return pd.read_csv(filepath)
 
 def preprocess_data(df):
-    """Preprocess dataset: handle categorical variables, date features, and scaling if needed."""
+    """Preprocess dataset: handle categorical variables, date features"""
 
     # Convert 'Date' column to datetime and extract useful features
     df["Date"] = pd.to_datetime(df["Date"])
@@ -35,7 +35,7 @@ def preprocess_data(df):
 
 def save_data(df, output_path):
     """Save the processed dataset to a CSV file."""
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)  # Create folder if it doesn't exist
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     df.to_csv(output_path, index=False)
     print(f"✅ Processed data saved to {output_path}")
 

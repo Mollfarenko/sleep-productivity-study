@@ -21,10 +21,10 @@ def train_dummy_regressors():
     strategies = ["mean", "median", "constant", "uniform"]
     constant_value = 5.0   # Example constant value
 
-    mlflow.set_experiment("Sleep Productivity Regression")
+    mlflow.set_experiment("Sleep Productivity Dummies")
 
     for strategy in strategies:
-        with mlflow.start_run():
+        with mlflow.start_run(run_name=f"DummyRegressor-{strategy}"):
             # Handle specific parameters for constant
             params = {"strategy": strategy}
             if strategy == "constant":
