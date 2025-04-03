@@ -9,6 +9,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Ridge, Lasso, LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
+import joblib
 
 def train_linear_regression():
     start_time = time.time()  # Start timer
@@ -64,9 +65,13 @@ def train_linear_regression():
         mlflow.log_metric("R2", r2)
 
         # Save model
-        model_path = "models/linear_regression_pipeline"
-        os.makedirs(model_path, exist_ok=True)
-        mlflow.sklearn.log_model(best_model, model_path)
+        model_dir = "models/linear_regression_pipeline"
+        os.makedirs(model_dir, exist_ok=True)
+        model_path = os.path.join(model_dir, "linear_regression.pkl")
+        joblib.dump(best_model, model_path)
+
+        # Log model in MLflow
+        mlflow.sklearn.log_model(best_model, artifact_path="linear_regression_model")
 
         print(f"Best Model: {grid_search.best_params_['regressor']}")
         print(f"Best Alpha: {grid_search.best_params_.get('regressor__alpha', 'N/A')}")
